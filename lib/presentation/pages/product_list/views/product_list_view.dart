@@ -5,10 +5,8 @@ import 'package:teste_brisa/model/repository/product_repository.dart';
 import 'package:teste_brisa/presentation/pages/product_list/bloc/product_list_bloc.dart';
 
 class ProductListView extends StatefulWidget {
-  final List<Product> products;
   final ProductListBloc _bloc = ProductListBloc(ProductsRepository());
-
-  ProductListView({super.key, required this.products});
+  ProductListView({super.key});
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +14,7 @@ class ProductListView extends StatefulWidget {
           bloc: _bloc,
           builder: (context, state) {
             bool loaded = state is ProductListDataLoadedState;
-            return loaded
+            return !loaded
                 ? const SafeArea(child: Placeholder())
                 : SafeArea(
                     child: ListView.builder(
@@ -27,7 +25,7 @@ class ProductListView extends StatefulWidget {
                           subtitle: Text((state).apiResult[index].body),
                         );
                       },
-                      itemCount: loaded ? 0 : (state as ProductListDataLoadedState).apiResult.length,
+                      itemCount: !loaded ? 0 : (state).apiResult.length,
                     ),
                   );
           }),
@@ -35,11 +33,15 @@ class ProductListView extends StatefulWidget {
   }
 
   @override
-  State<StatefulWidget> createState() => _ProductListViewState();
+  State<StatefulWidget> createState() => _ProductListViewState(_bloc);
 }
 
 class _ProductListViewState extends State<ProductListView> {
-  ProductListBloc _bloc = ProductListBloc(ProductsRepository());
+  ProductListBloc bloc;
+
+  // ProductListBloc _bloc = ProductListBloc(ProductsRepository());
+
+  _ProductListViewState(this.bloc);
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +51,13 @@ class _ProductListViewState extends State<ProductListView> {
   @override
   void dispose() {
     super.dispose();
-    _bloc.close();
+    bloc.close();
   }
 
   @override
   void initState() {
     super.initState();
-    _bloc = ProductListBloc(ProductsRepository());
-    _bloc.add(LoadProductDataEvent());
+    // _bloc = ProductListBloc(ProductsRepository());
+    bloc.add(LoadProductDataEvent());
   }
 }

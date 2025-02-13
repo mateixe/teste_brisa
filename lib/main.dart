@@ -25,7 +25,6 @@ class TesteBrisa extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ProductListView(
-        products: [],
       ),
     );
   }
