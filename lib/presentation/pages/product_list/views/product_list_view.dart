@@ -57,5 +57,6 @@ class _ProductListViewState extends State<ProductListView> {
     super.initState();
     // _bloc = ProductListBloc(ProductsRepository());
     _bloc.add(LoadProductDataEvent());
+
   }
 }
