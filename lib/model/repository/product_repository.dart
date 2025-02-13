@@ -13,14 +13,12 @@ class ProductsRepository {
 
   Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    final appDocumentDirectory =
-    await getApplicationDocumentsDirectory();
+    final appDocumentDirectory = await getApplicationDocumentsDirectory();
     Hive.init(appDocumentDirectory.path);
 
-    bool boxExists = await Hive.boxExists(Constants.prefsProductsListToken);
-    if(!boxExists){
-      _box = await Hive.openBox(Constants.prefsProductsListToken);
-    }
+    _box = await Hive.openBox(Constants.prefsProductsListToken);
+    // bool boxExists = await Hive.boxExists(Constants.prefsProductsListToken);
+    //   _box = !boxExists ? await Hive.openBox(Constants.prefsProductsListToken) : Hive.box(Constants.prefsProductsListToken);
   }
 
   late Box _box;
@@ -33,7 +31,7 @@ class ProductsRepository {
       return null;
     } else {
       Iterable models = jsonDecode(result.body);
-      persistListLocally(result.body);
+      await persistListLocally(result.body);
 
       List<Product> products = [];
       for (var model in models) {
@@ -46,6 +44,6 @@ class ProductsRepository {
   }
 
   Future<void> persistListLocally(String productsJson) async {
-    await _box.put('myData', jsonEncode(productsJson));
+    await _box.put(Constants.prefsProductsListToken, productsJson);
   }
 }

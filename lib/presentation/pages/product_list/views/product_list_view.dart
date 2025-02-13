@@ -21,10 +21,12 @@ class ProductListView extends StatelessWidget {
                 : SafeArea(
                     child: ListView.builder(
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          tileColor: Colors.white60,
-                          title: Text(state.apiResult[index].title),
-                          subtitle: Text(state.apiResult[index].body),
+                        return Card(
+                          child: ListTile(
+                            tileColor: Colors.white60,
+                            title: Text(state.apiResult[index].title),
+                            subtitle: Text(state.apiResult[index].body),
+                          ),
                         );
                       },
                       itemCount: state.apiResult.length,
