@@ -11,12 +11,12 @@ class ProductsRepository {
       return null;
     } else {
       Iterable models = jsonDecode(result.body);
-      List<Product> dataModels = [];
+      List<Product> products = [];
       for (var model in models) {
         Product dataModel = Product.fromJson(model);
-        dataModels.add(dataModel);
+        products.add(dataModel);
       }
-      return dataModels;
+      return products;
     }
   }
 }
