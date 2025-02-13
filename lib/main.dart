@@ -10,7 +10,7 @@ main() {
   runApp(
     BlocProvider(
       create: (context) => ProductListBloc(ProductsRepository()),
-      child: TesteBrisa(),
+      child: const TesteBrisa(),
     ),
   );
 }
@@ -23,7 +23,7 @@ class TesteBrisa extends StatelessWidget {
     return MaterialApp(
       title: 'Teste Brisa',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: ProductListView(
