@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teste_brisa/model/repository/product_repository.dart';
 import 'package:teste_brisa/presentation/pages/product_list/bloc/product_list_bloc.dart';
 import 'package:teste_brisa/presentation/pages/product_list/views/product_list_view.dart';
 
-void main() {
+main() {
   runApp(
     BlocProvider(
       create: (context) => ProductListBloc(ProductsRepository()),
