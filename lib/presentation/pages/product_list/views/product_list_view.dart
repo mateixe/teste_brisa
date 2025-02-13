@@ -9,28 +9,28 @@ class ProductListView extends StatefulWidget {
 
   ProductListView({super.key});
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<ProductListBloc, ProductListDataState>(
-          bloc: _bloc,
-          builder: (context, state) {
-            return state is! ProductListDataLoadedState
-                ? const SafeArea(child: Placeholder())
-                : SafeArea(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          tileColor: Colors.white60,
-                          title: Text(state.apiResult[index].title),
-                          subtitle: Text(state.apiResult[index].body),
-                        );
-                      },
-                      itemCount: state.apiResult.length,
-                    ),
-                  );
-          }),
-    );
-  }
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     body: BlocBuilder<ProductListBloc, ProductListDataState>(
+  //         bloc: _bloc,
+  //         builder: (context, state) {
+  //           return state is! ProductListDataLoadedState
+  //               ? const SafeArea(child: Placeholder())
+  //               : SafeArea(
+  //                   child: ListView.builder(
+  //                     itemBuilder: (context, index) {
+  //                       return ListTile(
+  //                         tileColor: Colors.white60,
+  //                         title: Text(state.apiResult[index].title),
+  //                         subtitle: Text(state.apiResult[index].body),
+  //                       );
+  //                     },
+  //                     itemCount: state.apiResult.length,
+  //                   ),
+  //                 );
+  //         }),
+  //   );
+  // }
 
   @override
   State<StatefulWidget> createState() => _ProductListViewState(_bloc);
