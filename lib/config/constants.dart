@@ -5,4 +5,5 @@ final class Constants{
   static const String  idProductCard = 'ID';
   static const String  titleProductCard = 'Título do Produto';
   static const String  reload = 'Recarregar';
+  static const String  titleProductList = 'Lista de Produtos';
 }
